@@ -25,7 +25,7 @@ export const addProductReducer = (state: any = initialState, action: any) => {
             }
         }
         case ActionType.ADD_PRODUCT_ERROR: {
-            alert(action.error);
+            alert("Failed to add product!");
             return {
                 ...state,
                 loading: false,
