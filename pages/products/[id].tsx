@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import React from 'react'
 import { useSelector } from 'react-redux';
 import Navbar from '../../src/components/navbar/Navbar';
 
-const productDetails = () => {
-  const router = useRouter();
+const ProductDetails: React.FC = () => {
+  const router: NextRouter = useRouter();
   const { id } = router.query;
   const products = useSelector((state: any) => state.productState);
   const { productName, price, stock, variant, img } = products.data.find((pd: any) => pd._id === id);
@@ -18,4 +18,4 @@ const productDetails = () => {
   )
 }
 
-export default productDetails;
+export default ProductDetails;
