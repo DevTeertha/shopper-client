@@ -56,7 +56,6 @@ export const getProductsReducer = (state: any = initialState, action: any) => {
             }
         }
         case ActionType.GET_PRODUCTS_ERROR: {
-            alert(action.error);
             return {
                 ...state,
                 loading: false,

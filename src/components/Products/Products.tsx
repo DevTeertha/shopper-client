@@ -18,9 +18,9 @@ const Products: React.FC = () => {
                 products.loading ? <h1>Loading...</h1> :
                     <div className='grid justify-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                         {
-                            products.data && products.data.map((product: IProduct, key: number) => {
+                            products.data.length > 0 ? products.data.map((product: IProduct, key: number) => {
                                 return <ProductCard key={key} product={product} />
-                            })
+                            }) : <h1>No Products Found!</h1>
                         }
                     </div>
             }
