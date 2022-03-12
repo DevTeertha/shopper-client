@@ -1,0 +1,22 @@
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+@import "~tailwindcss/utilities";
+
+.dashboard_nav_ul{
+    li{
+        border-bottom: 1px solid #ffffff6e;
+        button{
+            color: white;
+            font-weight: 500;
+            width: 100%;
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+            padding: 1em 0;
+            &:hover{
+                color: white;
+                background-color: #1a202c;
+            }
+        }
+    }
+}
