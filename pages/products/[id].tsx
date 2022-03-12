@@ -7,7 +7,9 @@ const ProductDetails: React.FC = () => {
   const router: NextRouter = useRouter();
   const { id } = router.query;
   const products = useSelector((state: any) => state.productState);
-  const { productName, price, stock, variant, img } = products.data.find((pd: any) => pd._id === id);
+  if (products.data) {
+    var { productName, price, stock, variant, img } = products.data.find((pd: any) => pd._id === id);
+  }
   return (
     <div>
       <Navbar />
