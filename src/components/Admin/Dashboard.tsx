@@ -1,9 +1,10 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import ProductList from './ProductList';
 
+
 const Dashboard: React.FC = () => {
-    const [dashboard, setDashboard] = useState<JSX.Element | undefined>(<ProductList />);
+    const [dashboard, setDashboard] = useState<JSX.Element>(<ProductList />);
     return (
         <div className='flex h-screen'>
             <div className='bg-gray-700 h-full w-1/5'>

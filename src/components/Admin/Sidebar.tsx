@@ -5,8 +5,10 @@ import EditProducts from './EditProducts';
 import DeleteProducts from './DeleteProducts';
 import OrderList from './OrderList';
 
-
-const Sidebar: React.FC = ({ setDashboard }: any) => {
+interface setStateI {
+    setDashboard: (value: JSX.Element) => void;
+}
+const Sidebar: React.FC<setStateI> = ({ setDashboard }: any) => {
     return (
         <div className='py-5'>
             <h1 className='text-center text-3xl font-bold text-white'>SHOPPER ADMIN</h1>
