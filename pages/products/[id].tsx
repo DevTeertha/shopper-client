@@ -1,7 +1,8 @@
 import { NextRouter, useRouter } from 'next/router';
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../../src/components/navbar/Navbar';
+import { getProductsAction } from '../../src/redux/Actions/ProductAction';
 
 const ProductDetails: React.FC = () => {
   const router: NextRouter = useRouter();
@@ -10,6 +11,10 @@ const ProductDetails: React.FC = () => {
   if (products.data.length > 0) {
     var { productName, price, stock, variant, img } = products.data.find((pd: any) => pd._id === id);
   }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductsAction())
+  }, []);
   return (
     <div>
       <Navbar />

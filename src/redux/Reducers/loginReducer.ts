@@ -1,6 +1,4 @@
-import { setStorage } from "../../components/localStorageHandler";
 import { ActionType } from "../actionTypes";
-import { useRouter } from 'next/router';
 
 const initialState = {
     loading: false,
@@ -18,22 +16,64 @@ export const loginReducer = (state: any = initialState, action: any) => {
             }
         }
         case ActionType.LOGIN_SUCCESS: {
-            setStorage('userToken', action.payload.token);
-            setStorage('userName', action.payload.data.name);
-            setStorage('userEmail', action.payload.data.email);
-            return {
-                ...state,
-                user: action.payload,
-                loading: false,
-                error: ''
+            alert(action.payload.message);
+            if (action.payload.status) {
+                return {
+                    ...state,
+                    user: action.payload,
+                    loading: false,
+                    error: ''
+                }
+            } else {
+                return {
+                    ...state,
+                    user: {},
+                    loading: false,
+                    error: action.payload.message
+                }
             }
         }
         case ActionType.LOGIN_ERROR: {
+            alert("Authentication Failed!");
             return {
                 ...state,
                 user: {},
                 loading: false,
-                error: 'Email/Password Wrong!'
+                error: action.payload.message
+            }
+        }
+        case ActionType.REGISTER_REQUEST: {
+            return {
+                ...state,
+                loading: true,
+                error: ''
+            }
+        }
+        case ActionType.REGISTER_SUCCESS: {
+            alert(action.payload.message);
+            if (action.payload.status) {
+                return {
+                    ...state,
+                    user: action.payload,
+                    loading: false,
+                    error: ''
+                }
+            } else {
+                return {
+                    ...state,
+                    user: {},
+                    loading: false,
+                    error: action.payload.message
+                }
+            }
+        }
+        case ActionType.REGISTER_ERROR: {
+            alert("Authentication Failed!");
+            return {
+                ...state,
+                user: {},
+                loading: false,
+                error: action.payload.message
             }
         }
         case ActionType.LOGOUT: {

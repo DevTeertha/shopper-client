@@ -38,16 +38,16 @@ const Navbar = () => {
                     >
                         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
                             <li className="nav-item">
-                                <Link href="/cart">
+                                <Link href="/products">
                                     <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                                        <span className="ml-2">Cart</span>
+                                        <span className="ml-2">Products</span>
                                     </a>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link href="/about">
                                     <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                                        <span className="ml-2">Products</span>
+                                        <span className="ml-2">About</span>
                                     </a>
                                 </Link>
                             </li>
@@ -60,6 +60,13 @@ const Navbar = () => {
                             </li>
                             {
                                 getStorage('userToken') ? <>
+                                    <li className="nav-item">
+                                        <Link href="/cart">
+                                            <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
+                                                <span className="ml-2">Cart</span>
+                                            </a>
+                                        </Link>
+                                    </li>
                                     <li className="nav-item cursor-pointer">
                                         <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
                                             <span className="ml-2">{getStorage('userName')}</span>

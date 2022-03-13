@@ -1,7 +1,10 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { registerAction } from '../../redux/Actions/loginAction';
 
 const RegisterForm = () => {
+    const dispatch = useDispatch();
     const [isEmptyRegisterInfo, setIsEmptyRegisterInfo] = useState({
         name: false,
         email: false,
@@ -21,7 +24,6 @@ const RegisterForm = () => {
             const key: string = e.target.name;
             newUserInfo[key] = e.target.value;
             newIsEmptyRegisterInfo[key] = false;
-            console.log("new Register Info: ", newUserInfo);
             setRegisterInfo(newUserInfo);
             setIsEmptyRegisterInfo(newIsEmptyRegisterInfo);
         } else {
@@ -33,9 +35,11 @@ const RegisterForm = () => {
 
     const registerHandler = (e: React.SyntheticEvent): void => {
         e.preventDefault();
+        const formId: any = document.getElementById('register_form');
+        formId.reset();
         if (registerInfo.name && registerInfo.email && registerInfo.password && registerInfo.confirm_password) {
             if (registerInfo.password === registerInfo.confirm_password) {
-                // Write Your Code
+                dispatch(registerAction(registerInfo.name, registerInfo.email, registerInfo.password))
             } else {
                 alert("Password not matched! Try Again!");
             }
@@ -51,7 +55,7 @@ const RegisterForm = () => {
                         Register your account
                     </h1>
 
-                    <form id='login_form' onSubmit={(e: React.SyntheticEvent) => registerHandler(e)}>
+                    <form id='register_form' onSubmit={(e: React.SyntheticEvent) => registerHandler(e)}>
                         <div>
                             <label htmlFor='name'>Name</label>
                             <input

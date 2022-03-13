@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { addProductI } from '../../interfaces/ProductsInterface';
 import { addProductAction } from '../../redux/Actions/ProductAction';
 
 const AddProduct: React.FC = () => {
   const [variant, setVariant] = useState<Array<string>>([]);
-  const [addProduct, setAddProudct] = useState({
+  const [addProduct, setAddProudct] = useState<addProductI>({
     productName: "",
+    description: "",
     price: "",
     stock: ""
   })
@@ -13,10 +15,10 @@ const AddProduct: React.FC = () => {
 
   const dispatch = useDispatch();
   const addProductState = useSelector((state: any) => state.addProduct);
-  console.log(addProductState);
   const addProductSubmitHandler = (e: any) => {
     e.preventDefault();
-    if (addProduct.productName && addProduct.price && addProduct.stock && variant.length > 0 && file) {
+    console.log(addProduct);
+    if (addProduct.productName && addProduct.description && addProduct.price && addProduct.stock && variant.length > 0 && file) {
       const formId: any = document.getElementById('addProduct_form');
       dispatch(addProductAction(addProduct.productName, addProduct.price, addProduct.stock, variant, file));
       setVariant([]);
@@ -40,15 +42,23 @@ const AddProduct: React.FC = () => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-              Stock
-            </label>
-            <input onBlur={(e) => setAddProudct({ ...addProduct, stock: e.target.value })} name='stock' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stock" type="number" placeholder="Stock" />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
               Price
             </label>
             <input onBlur={(e) => setAddProudct({ ...addProduct, price: e.target.value })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="number" placeholder="Price" />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              Qty
+            </label>
+            <input onBlur={(e) => setAddProudct({ ...addProduct, stock: e.target.value })} name='stock' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stock" type="number" placeholder="Qty" />
+          </div>
+        </div>
+        <div className='grid grid-cols-1 gap-4'>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              Description
+            </label>
+            <input name='description' onBlur={(e) => setAddProudct({ ...addProduct, description: e.target.value })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product_description" type="text" placeholder="Description" />
           </div>
         </div>
         <div className='grid grid-cols-3 gap-4'>
