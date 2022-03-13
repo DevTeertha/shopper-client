@@ -9,11 +9,8 @@ export const LoginAction = (email: string, password: string) => {
         dispatch({
             type: ActionType.LOGIN_REQUEST
         })
-        fetch('http://localhost:5000/api/user/login', {
+        fetch('https://shopper-server-app.herokuapp.com/api/user/login', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: loginData
         })
             .then(res => res.json())

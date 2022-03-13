@@ -1,29 +1,20 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../redux/Actions/loginAction';
-import { getStorage, removeStorage } from '../localStorageHandler';
+import { getStorage } from '../localStorageHandler';
 
 const Navbar = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const [navbarOpen, setNavbarOpen] = useState(false);
-    const [loginData, setLoginData] = useState({
-        name: "",
-        email: ""
-    });
+
     const logoutHandler = () => {
         dispatch(logoutAction());
         localStorage.clear();
         router.push('/');
     }
-    useEffect(()=>{
-        setLoginData({
-            name: getStorage('name'),
-            email: getStorage('email')
-        })
-    },[getStorage('email')])
     return (
         <>
             <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-emerald-500 mb-3">
@@ -68,13 +59,13 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             {
-                                loginData.email ? <>
+                                getStorage('userToken') ? <>
                                     <li className="nav-item cursor-pointer">
                                         <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                                            <span className="ml-2">{loginData.name}</span>
+                                            <span className="ml-2">{getStorage('userName')}</span>
                                         </a>
                                     </li>
-                                    <li onClick={()=>logoutHandler()} className="nav-item cursor-pointer">
+                                    <li onClick={() => logoutHandler()} className="nav-item cursor-pointer">
                                         <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
                                             <span className="ml-2">Logout</span>
                                         </a>

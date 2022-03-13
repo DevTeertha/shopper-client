@@ -1,16 +1,13 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { LoginAction, logoutAction } from '../../redux/Actions/loginAction';
-import { getStorage, setStorage } from '../localStorageHandler';
+import { LoginAction } from '../../redux/Actions/loginAction';
 
 const LoginForm: React.FC = () => {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: ""
   });
-  const router = useRouter();
   let newUserInfo: any = { ...userInfo };
   const dispatch = useDispatch();
   const loginDetails = useSelector((state: any) => state.login);
@@ -35,20 +32,6 @@ const LoginForm: React.FC = () => {
       alert("Email & Password Required!")
     }
   }
-  useEffect(() => {
-    if (!(Object.keys(loginDetails.user).length === 0 && loginDetails.user.constructor === Object)) {
-      if (loginDetails.user.status) {
-        setStorage('name', loginDetails.user.data.name);
-        setStorage('email', loginDetails.user.data.email);
-      } else {
-        dispatch(logoutAction());
-        alert(loginDetails.user.message)
-      }
-    }
-    if (getStorage('email')) {
-      router.push('/');
-    }
-  }, [loginDetails])
   return (
     <div className='container mx-auto px-4'>
       <div className='h-screen flex bg-gray-bg1'>

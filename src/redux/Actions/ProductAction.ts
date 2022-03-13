@@ -13,7 +13,7 @@ export const addProductAction = (productName: string, price: string, stock: stri
         dispatch({
             type: ActionType.ADD_PRODUCT_REQUEST
         })
-        fetch('http://localhost:5000/api/products/addProduct', {
+        fetch('https://shopper-server-app.herokuapp.com/api/products/addProduct', {
             method: 'POST',
             body: addProductFormData
         }).then(res => res.json()).then(data => {
@@ -43,7 +43,7 @@ export const getProductsAction = () => {
         dispatch({
             type: ActionType.GET_PRODUCTS_REQUEST
         })
-        fetch('http://localhost:5000/api/products/getProducts')
+        fetch('https://shopper-server-app.herokuapp.com/api/products/getProducts')
             .then(res => res.json())
             .then(data => {
                 dispatch({

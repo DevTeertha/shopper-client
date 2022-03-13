@@ -1,4 +1,6 @@
+import { setStorage } from "../../components/localStorageHandler";
 import { ActionType } from "../actionTypes";
+import { useRouter } from 'next/router';
 
 const initialState = {
     loading: false,
@@ -16,6 +18,9 @@ export const loginReducer = (state: any = initialState, action: any) => {
             }
         }
         case ActionType.LOGIN_SUCCESS: {
+            setStorage('userToken', action.payload.token);
+            setStorage('userName', action.payload.data.name);
+            setStorage('userEmail', action.payload.data.email);
             return {
                 ...state,
                 user: action.payload,
