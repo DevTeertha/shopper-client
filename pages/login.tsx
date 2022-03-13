@@ -5,7 +5,7 @@ import { getStorage } from '../src/components/localStorageHandler'
 import LoginForm from '../src/components/LoginRegister/LoginForm'
 import Navbar from '../src/components/navbar/Navbar'
 
-const login = () => {
+const Login = () => {
     const router = useRouter();
     const loginState = useSelector((state: any) => state.login);
     useEffect(() => {
@@ -24,4 +24,4 @@ const login = () => {
     )
 }
 
-export default login
+export default Login;
