@@ -17,7 +17,6 @@ const AddProduct: React.FC = () => {
   const addProductState = useSelector((state: any) => state.addProduct);
   const addProductSubmitHandler = (e: any) => {
     e.preventDefault();
-    console.log(addProduct);
     if (addProduct.productName && addProduct.description && addProduct.price && addProduct.stock && variant.length > 0 && file) {
       const formId: any = document.getElementById('addProduct_form');
       dispatch(addProductAction(addProduct.productName, addProduct.price, addProduct.stock, variant, file));

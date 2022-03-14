@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../src/components/Loader/Loader";
 import Navbar from "../src/components/navbar/Navbar";
 import Products from "../src/components/Products/Products";
-import Search from "../src/components/search/Search";
 import { getProductsAction } from "../src/redux/Actions/ProductAction";
 
 const Home: NextPage = () => {
@@ -20,7 +19,6 @@ const Home: NextPage = () => {
           <>
             <Navbar />
             <div className="container mx-auto px-5 py-12">
-              <Search />
               <Products />
             </div>
           </>

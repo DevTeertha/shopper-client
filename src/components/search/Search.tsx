@@ -1,12 +1,14 @@
 import React from 'react'
-
-const Search = () => {
+interface setStateI {
+    setSearched: (value: string) => void;
+}
+const Search: React.FC<setStateI> = ({ setSearched }) => {
     return (
         <div className="search_container">
             <div className="flex justify-center align-center">
                 <div className="md:w-full lg:w-5/12">
                     <div className="input-group relative flex flex-wrap items-stretch w-full">
-                        <input type="search" className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-emerald-600 focus:outline-none" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" />
+                        <input onChange={(e: any) => setSearched(e.target.value)} type="search" className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-emerald-600 focus:outline-none" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" />
                     </div>
                 </div>
                 <div>

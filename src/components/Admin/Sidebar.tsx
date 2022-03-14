@@ -1,8 +1,6 @@
 import React from 'react'
 import ProductList from './ProductList';
 import AddProduct from './AddProduct';
-import EditProducts from './EditProducts';
-import DeleteProducts from './DeleteProducts';
 import OrderList from './OrderList';
 
 interface setStateI {
@@ -18,12 +16,6 @@ const Sidebar: React.FC<setStateI> = ({ setDashboard }: any) => {
                 </li>
                 <li>
                     <button onClick={() => setDashboard(<AddProduct />)}>Add Product</button>
-                </li>
-                <li>
-                    <button onClick={() => setDashboard(<EditProducts />)}>Edit Products</button>
-                </li>
-                <li>
-                    <button onClick={() => setDashboard(<DeleteProducts />)}>Delete Products</button>
                 </li>
                 <li>
                     <button onClick={() => setDashboard(<OrderList />)}>Order list</button>
