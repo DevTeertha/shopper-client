@@ -8,7 +8,7 @@ import { cartItemI } from '../src/interfaces/ProductsInterface';
 import { placeOrderAction } from '../src/redux/Actions/placeOrderAction';
 import { removeAllCart } from './../src/redux/Actions/cartAction';
 
-const cart: NextPage = () => {
+const cart = () => {
     const dispatch = useDispatch();
     const cartState: any = useSelector((state: any) => state.cart);
     const placedOrderHandler = () => {

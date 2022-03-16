@@ -50,8 +50,8 @@ const Products: React.FC = () => {
                             :
                             products.data.length > 0 ?
                                 searchHandler(products.data, searched).length > 0 ?
-                                    searchHandler(products.data, searched).map((product: IProduct, key: number) => {
-                                        return <ProductCard key={key} product={product} />
+                                    searchHandler(products.data, searched).map((product: IProduct) => {
+                                        return <ProductCard key={product._id} product={product} />
                                     }) : <h1>No Products Found!</h1>
                                 :
                                 <h1>No Products Found!</h1>

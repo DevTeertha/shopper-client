@@ -1,4 +1,5 @@
 export interface IProduct {
+  _id: string,
   productName: string | undefined;
   price: string | undefined;
   variant: string[] | Blob;
