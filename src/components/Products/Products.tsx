@@ -4,6 +4,7 @@ import { highToSortAction, lowToHigSortAction } from '../../redux/Actions/sortAc
 import { ActionType } from '../../redux/actionTypes';
 import { IProduct } from '../../redux/types/_types';
 import Search from '../search/Search';
+import { searchHandler } from '../search/searchHandler';
 import ProductCard from './ProductCard';
 
 const Products: React.FC = () => {
@@ -19,15 +20,6 @@ const Products: React.FC = () => {
         else if (e.target.value === ActionType.HIGH_TO_LOW) {
             dispatch(highToSortAction(products.data));
         }
-    }
-    const searchHandler = (arr: any): any => {
-        return arr.filter((val: any) => {
-            if (searched === "") {
-                return val;
-            } else if (val.productName.toLowerCase().includes(searched.toLowerCase())) {
-                return val;
-            }
-        })
     }
     useEffect(() => {
         dispatch(lowToHigSortAction(products.data));
@@ -51,14 +43,14 @@ const Products: React.FC = () => {
                 <div className='grid justify-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                     {
                         sortedProductsState.length ?
-                            searchHandler(sortedProductsState).length > 0 ?
-                                searchHandler(sortedProductsState).map((product: IProduct, key: number) => <ProductCard key={key} product={product} />)
+                            searchHandler(sortedProductsState, searched).length > 0 ?
+                                searchHandler(sortedProductsState, searched).map((product: IProduct, key: number) => <ProductCard key={key} product={product} />)
                                 :
                                 <h1>No Products Found!</h1>
                             :
                             products.data.length > 0 ?
-                                searchHandler(products.data).length > 0 ?
-                                    searchHandler(products.data).map((product: IProduct, key: number) => {
+                                searchHandler(products.data, searched).length > 0 ?
+                                    searchHandler(products.data, searched).map((product: IProduct, key: number) => {
                                         return <ProductCard key={key} product={product} />
                                     }) : <h1>No Products Found!</h1>
                                 :

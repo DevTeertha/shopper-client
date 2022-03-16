@@ -1,26 +1,44 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProductI } from '../../interfaces/ProductsInterface';
+import { addProductI, VariantI } from '../../interfaces/ProductsInterface';
 import { addProductAction } from '../../redux/Actions/ProductAction';
 
 const AddProduct: React.FC = () => {
-  const [variant, setVariant] = useState<Array<string>>([]);
   const [addProduct, setAddProudct] = useState<addProductI>({
     productName: "",
     description: "",
-    price: "",
     stock: ""
   })
+  const [variantState, setVariantState] = useState([
+    {
+      variant: "",
+      price: ""
+    },
+    {
+      variant: "",
+      price: ""
+    },
+    {
+      variant: "",
+      price: ""
+    }
+  ]);
+  let variants: any = [...variantState];
   const [file, setFile] = useState<File>();
 
   const dispatch = useDispatch();
   const addProductState = useSelector((state: any) => state.addProduct);
+
+  const setVariantHandler = (e: any, key: number, name: string) => {
+    const value: string = e.target.value;
+    variants[key][name] = value;
+    setVariantState(variants);
+  }
   const addProductSubmitHandler = (e: any) => {
     e.preventDefault();
-    if (addProduct.productName && addProduct.description && addProduct.price && addProduct.stock && variant.length > 0 && file) {
+    if (addProduct.productName && addProduct.description && addProduct.stock && variantState[0].variant.length > 0 && file) {
       const formId: any = document.getElementById('addProduct_form');
-      dispatch(addProductAction(addProduct.productName, addProduct.price, addProduct.stock, variant, file));
-      setVariant([]);
+      dispatch(addProductAction(addProduct.productName, addProduct.description, addProduct.stock, variantState, file));
       formId.reset();
     } else {
       alert("All filed must be required!");
@@ -32,18 +50,12 @@ const AddProduct: React.FC = () => {
   return (
     <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <form id='addProduct_form' onSubmit={(e) => addProductSubmitHandler(e)}>
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-2 gap-4'>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
               Product Name
             </label>
             <input name='productName' onBlur={(e) => setAddProudct({ ...addProduct, productName: e.target.value })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product_name" type="text" placeholder="Product Name" />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-              Price
-            </label>
-            <input onBlur={(e) => setAddProudct({ ...addProduct, price: e.target.value })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="number" placeholder="Price" />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
@@ -60,28 +72,50 @@ const AddProduct: React.FC = () => {
             <input name='description' onBlur={(e) => setAddProudct({ ...addProduct, description: e.target.value })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product_description" type="text" placeholder="Description" />
           </div>
         </div>
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-2 gap-4'>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Variant 1
             </label>
-            <input onBlur={(e) => setVariant([...variant, e.target.value])} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="variant1" type="text" placeholder="Variant1" />
+            <input name="variant" onBlur={(e: any) => setVariantHandler(e, 0, "variant")} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Variant" />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Price 1
+            </label>
+            <input name="price" onBlur={(e: any) => setVariantHandler(e, 0, "price")} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Price" />
+          </div>
+        </div>
+        <div className='grid grid-cols-2 gap-4'>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Variant 2
             </label>
-            <input onBlur={(e) => setVariant([...variant, e.target.value])} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="variant2" type="text" placeholder="Variant2" />
+            <input name="variant" onBlur={(e: any) => setVariantHandler(e, 1, "variant")} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Variant" />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Price 2
+            </label>
+            <input name="price" onBlur={(e: any) => setVariantHandler(e, 1, "price")} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Price" />
+          </div>
+        </div>
+        <div className='grid grid-cols-2 gap-4'>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Variant 3
             </label>
-            <input onBlur={(e) => setVariant([...variant, e.target.value])} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="variant3" type="text" placeholder="Variant3" />
+            <input name="variant" onBlur={(e: any) => setVariantHandler(e, 2, "variant")} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Variant" />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Price 3
+            </label>
+            <input name="price" onBlur={(e: any) => setVariantHandler(e, 2, "price")} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Price" />
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Upload
           </label>
           <input onChange={(e: any) => setFile(e.target.files[0])} id="image" type="file" />

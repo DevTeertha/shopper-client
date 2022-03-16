@@ -1,4 +1,4 @@
-import { addProductReducer, getProductsReducer } from './productsReducer';
+import { addProductReducer, deleteProductReducer, getProductsReducer } from './productsReducer';
 import { cartReducer } from "./cartReducer";
 import { combineReducers } from "@reduxjs/toolkit";
 import { loginReducer } from "./loginReducer";
@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   login: loginReducer,
   addProduct: addProductReducer,
+  deleteProduct: deleteProductReducer,
   productState: getProductsReducer,
   sortedProductState: sortReducer
 });

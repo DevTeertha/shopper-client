@@ -50,7 +50,6 @@ export const loginReducer = (state: any = initialState, action: any) => {
             }
         }
         case ActionType.REGISTER_SUCCESS: {
-            alert(action.payload.message);
             if (action.payload.status) {
                 return {
                     ...state,
@@ -66,6 +65,7 @@ export const loginReducer = (state: any = initialState, action: any) => {
                     error: action.payload.message
                 }
             }
+            alert(action.payload.message);
         }
         case ActionType.REGISTER_ERROR: {
             alert("Authentication Failed!");

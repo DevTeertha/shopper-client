@@ -9,6 +9,7 @@ const Navbar = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const [navbarOpen, setNavbarOpen] = useState(false);
+    const [isOpenProfileDropdown, setIsOpenProfileDropdown] = useState(false);
 
     const logoutHandler = () => {
         dispatch(logoutAction());
@@ -17,7 +18,7 @@ const Navbar = () => {
     }
     return (
         <>
-            <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-emerald-500 mb-3">
+            <nav className="sticky top-0 z-30 relative flex flex-wrap items-center justify-between px-2 py-3 bg-emerald-500 mb-3">
                 <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                         <Link href="/">
@@ -67,15 +68,24 @@ const Navbar = () => {
                                             </a>
                                         </Link>
                                     </li>
-                                    <li className="nav-item cursor-pointer">
-                                        <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                                            <span className="ml-2">{getStorage('userName')}</span>
+                                    <li className="nav-item relative cursor-pointer">
+                                        <a onClick={() => setIsOpenProfileDropdown(!isOpenProfileDropdown)} className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
+                                            <span className="ml-2">Hi, {getStorage('userName').split(" ")[0]}</span> <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </a>
-                                    </li>
-                                    <li onClick={() => logoutHandler()} className="nav-item cursor-pointer">
-                                        <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                                            <span className="ml-2">Logout</span>
-                                        </a>
+
+                                        <div className={`${isOpenProfileDropdown ? "" : "hidden"} top-12 absolute z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}>
+                                            <ul className="py-1">
+                                                <li>
+                                                    <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                                                </li>
+                                            </ul>
+                                            <div onClick={() => logoutHandler()} className="py-1">
+                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
+                                            </div>
+                                        </div>
                                     </li>
                                 </> :
                                     <li className="nav-item">
