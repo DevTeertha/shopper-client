@@ -68,7 +68,7 @@ const Navbar = () => {
                                             </a>
                                         </Link>
                                     </li>
-                                    <li className="nav-item relative cursor-pointer">
+                                    {/* <li className="nav-item relative cursor-pointer">
                                         <a onClick={() => setIsOpenProfileDropdown(!isOpenProfileDropdown)} className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
                                             <span className="ml-2">Hi, {getStorage('userName').split(" ")[0]}</span> <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </a>
@@ -86,7 +86,7 @@ const Navbar = () => {
                                                 <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> */}
                                 </> :
                                     <li className="nav-item">
                                         <Link href="/login">

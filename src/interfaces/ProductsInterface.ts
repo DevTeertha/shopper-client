@@ -2,6 +2,12 @@ export interface VariantI {
     variant: string,
     price: string
 }
+
+export interface UserI {
+    userToken: string,
+    name: string,
+    email: string
+}
 export interface ImageObjectI {
     contentType: string,
     size: number,

@@ -12,8 +12,15 @@ const cart: NextPage = () => {
     const dispatch = useDispatch();
     const cartState: any = useSelector((state: any) => state.cart);
     const placedOrderHandler = () => {
-        dispatch(placeOrderAction(getStorage('userToken'), cartState.totalPrice, cartState.cartItems, "processing"));
-        dispatch(removeAllCart());
+        if (getStorage('userToken')) {
+            const user = {
+                userToken: getStorage('userToken'),
+                name: getStorage('userName'),
+                email: getStorage('userEmail'),
+            }
+            dispatch(placeOrderAction(user, cartState.totalPrice, cartState.cartItems, "processing"));
+            dispatch(removeAllCart());
+        }
     }
     return (
         <>
