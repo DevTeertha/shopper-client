@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { logoutAction } from '../../redux/Actions/loginAction';
+import { getUserDetailsAction, logoutAction } from '../../redux/Actions/loginAction';
 import { getStorage } from '../localStorageHandler';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const router = useRouter();
@@ -11,11 +12,20 @@ const Navbar = () => {
     const [navbarOpen, setNavbarOpen] = useState(false);
     const [isOpenProfileDropdown, setIsOpenProfileDropdown] = useState(false);
 
+    const userDetails = useSelector((state: any) => state.userDetails);
+
     const logoutHandler = () => {
         dispatch(logoutAction());
         localStorage.clear();
         router.push('/');
     }
+
+    useEffect(() => {
+        if (getStorage('userToken')) {
+            const apiKey = getStorage('userToken');
+            dispatch(getUserDetailsAction(apiKey))
+        }
+    }, [getStorage('userToken')])
     return (
         <>
             <nav className="sticky top-0 z-30 relative flex flex-wrap items-center justify-between px-2 py-3 bg-emerald-500 mb-3">
@@ -68,9 +78,9 @@ const Navbar = () => {
                                             </a>
                                         </Link>
                                     </li>
-                                    {/* <li className="nav-item relative cursor-pointer">
+                                    <li className="nav-item relative cursor-pointer">
                                         <a onClick={() => setIsOpenProfileDropdown(!isOpenProfileDropdown)} className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                                            <span className="ml-2">Hi, {getStorage('userName').split(" ")[0]}</span> <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                            <span className="ml-2">Hi {userDetails.user.user.name ? userDetails.user.user.name.split(" ")[0] : userDetails.user.user.email.split("@")[0]} </span> <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </a>
 
                                         <div className={`${isOpenProfileDropdown ? "" : "hidden"} top-12 absolute z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}>
@@ -86,7 +96,7 @@ const Navbar = () => {
                                                 <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
                                             </div>
                                         </div>
-                                    </li> */}
+                                    </li>
                                 </> :
                                     <li className="nav-item">
                                         <Link href="/login">

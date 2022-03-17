@@ -9,7 +9,7 @@ const AddProduct: React.FC = () => {
     description: "",
     stock: ""
   })
-  const [variantState, setVariantState] = useState([
+  const [variantState, setVariantState] = useState<Array<VariantI>>([
     {
       variant: "",
       price: ""

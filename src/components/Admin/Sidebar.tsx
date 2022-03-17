@@ -20,9 +20,6 @@ const Sidebar: React.FC<setStateI> = ({ setDashboard }: any) => {
                 <li>
                     <button onClick={() => setDashboard(<OrderList />)}>Order list</button>
                 </li>
-                <li>
-                    <button>Log out</button>
-                </li>
             </ul>
         </div>
     )

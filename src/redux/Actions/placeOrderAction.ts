@@ -1,10 +1,8 @@
-import { UserI } from "../../interfaces/ProductsInterface";
 import { ActionType } from "../actionTypes";
 
-export const placeOrderAction = (user: UserI, totalPrice: number, OrderList: [], orderStatus: string) => {
+export const placeOrderAction = (userToken: string, totalPrice: number, OrderList: [], orderStatus: string) => {
     const placeOrderData = new FormData();
-    placeOrderData.append('name', user.name);
-    placeOrderData.append('email', user.email);
+    placeOrderData.append('userToken', userToken);
     placeOrderData.append('totalPrice', totalPrice.toString());
     placeOrderData.append('OrderList', JSON.stringify(OrderList));
     placeOrderData.append('orderStatus', orderStatus);
@@ -18,16 +16,14 @@ export const placeOrderAction = (user: UserI, totalPrice: number, OrderList: [],
             body: placeOrderData
         }).then(res => res.json()).then(data => {
             if (data.status) {
-                alert(data.message);
                 dispatch({
                     type: ActionType.PLACE_ORDER_SUCCESS,
-                    payload: data.message
+                    payload: data
                 })
             } else {
-                alert(data.message);
                 dispatch({
                     type: ActionType.PLACE_ORDER_ERROR,
-                    payload: data.message
+                    payload: data
                 })
             }
         }).catch((err: any) => {

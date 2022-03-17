@@ -1,8 +1,12 @@
 import { ActionType } from "../actionTypes"
+import { PlaceOrderAction, placeOrderStateI } from "../types/_types";
 
-const initialState = {
+const initialState: placeOrderStateI = {
     loading: false,
-    data: {},
+    data: {
+        status: false,
+        message: ""
+    },
     error: ''
 }
 
@@ -26,8 +30,10 @@ export const placeOrderReducer = (state: any = initialState, action: any) => {
                 ...state,
                 loading: false,
                 data: {},
-                error: action.error
+                error: action.payload.message
             }
         }
+        default:
+            return state;
     }
 }

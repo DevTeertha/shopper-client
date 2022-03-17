@@ -21,6 +21,8 @@ const ProductDetails: React.FC = () => {
     var productDetails = products.data.find((pd: any) => pd._id === id);
     if (productDetails) {
       var { _id, productName, description, stock, variant, img } = productDetails;
+    } else {
+      router.push('/products/404')
     }
   }
 
@@ -76,7 +78,7 @@ const ProductDetails: React.FC = () => {
                       return <span onClick={() => {
                         setSelectPrice(list.price);
                         setSelectVariant(list.variant)
-                      }} className={`${selectVariant === list.variant ? "bg-emerald-500 text-white" : ""} cursor-pointer border border-emerald-500 py-1 px-3 mr-3 rounded`} key={key}>{list.variant}</span>
+                      }} className={`${selectVariant === list.variant ? "bg-emerald-500 text-white" : ""} cursor-pointer inline-block my-2 border border-emerald-500 py-1 px-3 mr-3 rounded`} key={key}>{list.variant}</span>
                     })
                   }
                 </div>

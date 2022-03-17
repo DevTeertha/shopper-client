@@ -62,3 +62,28 @@ export const logoutAction = () => {
         type: ActionType.LOGOUT
     }
 }
+export const getUserDetailsAction = (apikey: string) => {
+    const userToken = "bearer " + apikey;
+    const userHeader = new Headers();
+    userHeader.append("Authorization", userToken);
+    return (dispatch: any) => {
+        fetch("https://shopper-server-app.herokuapp.com/api/user/userDetails", {
+            method: 'GET',
+            headers: userHeader
+        })
+            .then(response => response.json())
+            .then(result => {
+                dispatch({
+                    type: ActionType.GET_USER_DETAILS_SUCCESS,
+                    payload: result
+                })
+            })
+            .catch(error =>
+                dispatch({
+                    type: ActionType.GET_USER_DETAILS_ERROR,
+                    payload: error,
+                    error: error.message
+                })
+            );
+    }
+}

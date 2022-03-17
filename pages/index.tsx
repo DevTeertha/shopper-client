@@ -10,7 +10,6 @@ const Home: NextPage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: any) => state.productState);
   useEffect(() => {
-    console.log((new Date()).toString());
     if ((products.data.length > 0) === false) {
       dispatch(getProductsAction())
     }

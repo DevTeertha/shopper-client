@@ -1,12 +1,43 @@
 import { VariantI } from "../../interfaces/ProductsInterface";
 import { ActionType } from "../actionTypes";
 
-export const addProductAction = (productName: string, description: string, stock: string, variants: any, file: File) => {
+export const editProductAction = (_id: string, productName: string, description: string, stock: string, variants: VariantI[]) => {
+    const editProductFormData = new FormData();
+    editProductFormData.append('_id', _id);
+    editProductFormData.append('productName', productName);
+    editProductFormData.append('description', description);
+    editProductFormData.append('stock', stock);
+    editProductFormData.append('variant', JSON.stringify(variants));
+    return (dispatch: any) => {
+        dispatch({
+            type: ActionType.EDIT_PRODUCT_REQUEST
+        })
+        fetch('https://shopper-server-app.herokuapp.com/api/products/editProduct', {
+            method: 'PUT',
+            body: editProductFormData
+        }).then(res => res.json()).then(data => {
+            console.log("data edit: ", data);
+            if (data.status) {
+                dispatch({
+                    type: ActionType.EDIT_PRODUCT_SUCCESS,
+                    payload: data
+                })
+            } else {
+                dispatch({
+                    type: ActionType.EDIT_PRODUCT_ERROR,
+                    error: data.message
+                })
+            }
+        }).catch(err => {
+            throw err;
+        })
+    }
+}
+export const addProductAction = (productName: string, description: string, stock: string, variants: VariantI[], file: File) => {
     console.log("productName: ", productName);
     console.log("description: ", description);
     console.log("stock: ", stock);
     console.log("variants: ", variants);
-    console.log("file: ", file);
     const addProductFormData = new FormData();
     addProductFormData.append('productName', productName);
     addProductFormData.append('description', description);

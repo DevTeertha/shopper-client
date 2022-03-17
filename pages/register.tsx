@@ -11,8 +11,6 @@ const Register = () => {
     useEffect(() => {
         if (Object.keys(loginState.user).length) {
             setStorage('userToken', loginState.user.token);
-            setStorage('userName', loginState.user.data.name);
-            setStorage('userEmail', loginState.user.data.email);
             router.push("/");
         }
     }, [loginState]);

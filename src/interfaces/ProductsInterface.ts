@@ -2,18 +2,13 @@ export interface VariantI {
     variant: string,
     price: string
 }
-
-export interface UserI {
-    userToken: string,
-    name: string,
-    email: string
-}
 export interface ImageObjectI {
     contentType: string,
     size: number,
     img: string
 }
 export interface addProductI {
+    _id?: string,
     productName: string,
     description: string,
     stock: string
@@ -35,4 +30,33 @@ export interface cartinitialState {
     cartItems: cartItemI[],
     totalItems: number,
     totalPrice: number
+}
+
+export interface productI {
+    _id: string,
+    productName: string,
+    description: string,
+    stock: string,
+    variant: VariantI[],
+    img: ImageObjectI
+}
+
+export interface productPropsI {
+    product: productI
+}
+export interface getOrdersI {
+    _id: string,
+    user: {
+        name: string,
+        email: string,
+        userId: string
+    },
+    totalPrice: string,
+    orderList: cartItemI[],
+    orderStatus: string,
+    date: string
+}
+export type orderState = {
+    loading: boolean,
+    data: getOrdersI[]
 }

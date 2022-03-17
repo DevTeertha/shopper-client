@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { deleteProductAction } from '../../redux/Actions/ProductAction';
+import { EditModal } from './EditModal';
 
 export const ProductListCard: any = ({ product }: any) => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export const ProductListCard: any = ({ product }: any) => {
             <td className=" text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8] ">
                 <div className='flex justify-center'>
                     <div>
-                        <a className='cursor-pointer text-green-500 font-bold decoration-1'>Edit</a>
+                        <EditModal product={product} />
                     </div>
                     <div className='ml-5'>
                         <a onClick={() => dispatch(deleteProductAction(product._id))} className='cursor-pointer text-red-500 font-bold decoration-1'>Delete</a>

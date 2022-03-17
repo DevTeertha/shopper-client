@@ -1,12 +1,48 @@
+import { removeStorage } from "../../components/localStorageHandler";
 import { ActionType } from "../actionTypes";
+import { loginUserStateI, userDetailsStateI } from "../types/_types";
 
-const initialState = {
+const initialState: loginUserStateI = {
     loading: false,
     user: {},
     error: ''
 }
 
-export const loginReducer = (state: any = initialState, action: any) => {
+const userDetailsInitialState: userDetailsStateI = {
+    loading: false,
+    user: {
+        status: false,
+        user: {
+            name: "",
+            email: "",
+            userId: ""
+        },
+        message: ""
+    },
+    error: ""
+}
+export const userDetailsReducer = (state: userDetailsStateI = userDetailsInitialState, action: any) => {
+    switch (action.type) {
+        case ActionType.GET_USER_DETAILS_SUCCESS: {
+            return {
+                ...state,
+                user: action.payload
+            }
+        }
+        case ActionType.GET_USER_DETAILS_ERROR: {
+            alert("Authentication failed!");
+            removeStorage();
+            return {
+                ...state,
+                error: action.payload.message
+            }
+        }
+        default:
+            return state;
+    }
+}
+
+export const loginReducer = (state: loginUserStateI = initialState, action: any) => {
     switch (action.type) {
         case ActionType.LOGIN_REQUEST: {
             return {
@@ -51,6 +87,7 @@ export const loginReducer = (state: any = initialState, action: any) => {
         }
         case ActionType.REGISTER_SUCCESS: {
             if (action.payload.status) {
+                alert('Registration Successful!');
                 return {
                     ...state,
                     user: action.payload,
@@ -65,7 +102,6 @@ export const loginReducer = (state: any = initialState, action: any) => {
                     error: action.payload.message
                 }
             }
-            alert(action.payload.message);
         }
         case ActionType.REGISTER_ERROR: {
             alert("Authentication Failed!");
