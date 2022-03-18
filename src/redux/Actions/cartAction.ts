@@ -12,9 +12,9 @@ export const removeToCart = (payload: any) => {
     type: ActionType.REMOVE_FROM_CART,
     payload,
   };
-}
+};
 export const removeAllCart = () => {
   return {
-    type: ActionType.REMOVE_ALL_CART
+    type: ActionType.REMOVE_ALL_CART,
   };
-}
+};

@@ -1,5 +1,5 @@
 export interface IProduct {
-  _id: string,
+  _id: string;
   productName: string | undefined;
   price: string | undefined;
   variant: string[] | Blob;
@@ -7,39 +7,39 @@ export interface IProduct {
   stock: string | undefined;
 }
 export interface loginUserStateI {
-  loading: boolean,
+  loading: boolean;
   user: {
-    token?: string
-  },
-  error: string
+    token?: string;
+  };
+  error: string;
 }
 export interface placeOrderStateI {
-  loading: boolean,
+  loading: boolean;
   data: {
-    status: boolean,
-    message: string
-  },
-  error: string
+    status: boolean;
+    message: string;
+  };
+  error: string;
 }
 export interface userDetailsStateI {
-  loading: boolean,
+  loading: boolean;
   user: {
-    status?: boolean,
+    status?: boolean;
     user?: {
-      name?: string,
-      email?: string,
-      userId?: string
-    },
-    message?: string
-  },
-  error: ""
+      name?: string;
+      email?: string;
+      userId?: string;
+    };
+    message?: string;
+  };
+  error: "";
 }
 export interface UserI {
-  userId: string,
-  email: string,
-  name: string
+  userId: string;
+  email: string;
+  name: string;
 }
 export type PlaceOrderAction = {
-  type: string,
-  payload: string
-}
+  type: string;
+  payload: string;
+};

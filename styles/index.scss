@@ -2,42 +2,42 @@
 @import "~tailwindcss/components";
 @import "~tailwindcss/utilities";
 
-.navbar_dropdown_profile{
-    position: absolute;
-    top: 55px;
-    color: black;
-    width: 100%;
-    li{
-        padding: 0.4em;
-        border-bottom: 1px solid gray;
-    }
+.navbar_dropdown_profile {
+  position: absolute;
+  top: 55px;
+  color: black;
+  width: 100%;
+  li {
+    padding: 0.4em;
+    border-bottom: 1px solid gray;
+  }
 }
-.dashboard_nav_ul{
-    li{
-        border-bottom: 1px solid #ffffff6e;
-        button{
-            color: white;
-            font-weight: 500;
-            width: 100%;
-            text-align: center;
-            display: block;
-            margin: 0 auto;
-            padding: 1em 0;
-            &:hover{
-                color: white;
-                background-color: #1a202c;
-            }
-        }
+.dashboard_nav_ul {
+  li {
+    border-bottom: 1px solid #ffffff6e;
+    button {
+      color: white;
+      font-weight: 500;
+      width: 100%;
+      text-align: center;
+      display: block;
+      margin: 0 auto;
+      padding: 1em 0;
+      &:hover {
+        color: white;
+        background-color: #1a202c;
+      }
     }
+  }
 }
-.cart_item_count{
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    top: -7px;
-    right: 30%;
+.cart_item_count {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  top: -7px;
+  right: 30%;
 }

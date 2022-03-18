@@ -1,14 +1,15 @@
-import React from 'react';
-import CartList from '../src/components/Cart/CartList';
-import Navbar from '../src/components/navbar/Navbar';
+import { NextPage } from "next";
+import React from "react";
+import CartList from "../src/components/Cart/CartList";
+import Navbar from "../src/components/navbar/Navbar";
 
-const cart = () => {
-    return (
-        <>
-            <Navbar />
-            <CartList />
-        </>
-    )
-}
+const cart: NextPage = () => {
+  return (
+    <>
+      <Navbar />
+      <CartList />
+    </>
+  );
+};
 
 export default cart;
