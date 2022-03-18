@@ -19,6 +19,7 @@ export const placeOrderReducer = (state: any = initialState, action: any) => {
             }
         }
         case ActionType.PLACE_ORDER_SUCCESS: {
+            alert("Order placed sucessfully!");
             return {
                 ...state,
                 loading: false,

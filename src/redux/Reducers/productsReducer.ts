@@ -18,7 +18,7 @@ export const getProductsReducer = (state: any = initialState, action: any) => {
             return {
                 ...state,
                 loading: false,
-                data: action.payload,
+                data: action.payload.reverse(),
                 error: ''
             }
         }

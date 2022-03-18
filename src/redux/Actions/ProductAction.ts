@@ -12,7 +12,7 @@ export const editProductAction = (_id: string, productName: string, description:
         dispatch({
             type: ActionType.EDIT_PRODUCT_REQUEST
         })
-        fetch('https://shopper-server-app.herokuapp.com/api/products/editProduct', {
+        fetch('http://localhost:5000/api/products/editProduct', {
             method: 'PUT',
             body: editProductFormData
         }).then(res => res.json()).then(data => {
@@ -48,7 +48,7 @@ export const addProductAction = (productName: string, description: string, stock
         dispatch({
             type: ActionType.ADD_PRODUCT_REQUEST
         })
-        fetch('https://shopper-server-app.herokuapp.com/api/products/addProduct', {
+        fetch('http://localhost:5000/api/products/addProduct', {
             method: 'POST',
             body: addProductFormData
         }).then(res => res.json()).then(data => {
@@ -77,7 +77,7 @@ export const getProductsAction = () => {
         dispatch({
             type: ActionType.GET_PRODUCTS_REQUEST
         })
-        fetch('https://shopper-server-app.herokuapp.com/api/products/getProducts')
+        fetch('http://localhost:5000/api/products/getProducts')
             .then(res => res.json())
             .then(data => {
                 dispatch({
@@ -101,7 +101,7 @@ export const deleteProductAction = (productId: string) => {
         dispatch({
             type: ActionType.DELETE_PRODUCT_REQUEST
         })
-        fetch('https://shopper-server-app.herokuapp.com/api/products/deleteProduct', {
+        fetch('http://localhost:5000/api/products/deleteProduct', {
             method: 'DELETE',
             body: deleteProductData
         })

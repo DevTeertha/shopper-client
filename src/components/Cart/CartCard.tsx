@@ -12,7 +12,7 @@ export const CartCard: React.FC<any> = ({ item }: any) => {
     return (
         <div className='border-b border-gray-300 pb-4'>
             <div className='flex justify-between items-center'>
-                <div>
+                <div className='w-3/6'>
                     <div className='flex'>
                         <img className="h-32" src={`data:image/jpeg;base64,${img.img}`} alt={_id} />
                         <div className='p-3'>

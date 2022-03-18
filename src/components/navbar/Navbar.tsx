@@ -9,10 +9,12 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
     const router = useRouter();
     const dispatch = useDispatch();
+
     const [navbarOpen, setNavbarOpen] = useState(false);
     const [isOpenProfileDropdown, setIsOpenProfileDropdown] = useState(false);
 
     const userDetails = useSelector((state: any) => state.userDetails);
+    const cart = useSelector((state: any) => state.cart);
 
     const logoutHandler = () => {
         dispatch(logoutAction());
@@ -49,13 +51,6 @@ const Navbar = () => {
                     >
                         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
                             <li className="nav-item">
-                                <Link href="/products">
-                                    <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                                        <span className="ml-2">Products</span>
-                                    </a>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
                                 <Link href="/about">
                                     <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
                                         <span className="ml-2">About</span>
@@ -71,10 +66,20 @@ const Navbar = () => {
                             </li>
                             {
                                 getStorage('userToken') ? <>
-                                    <li className="nav-item">
+                                    <li className="nav-item relative">
                                         <Link href="/cart">
                                             <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
                                                 <span className="ml-2">Cart</span>
+                                            </a>
+                                        </Link>
+                                        {
+                                            cart.totalItems > 0 && <div className='cart_item_count bg-red-500 text-white p-0'>{cart.totalItems}</div>
+                                        }
+                                    </li>
+                                    <li className="nav-item relative">
+                                        <Link href="/order-list">
+                                            <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
+                                                <span className="ml-2">Order List</span>
                                             </a>
                                         </Link>
                                     </li>

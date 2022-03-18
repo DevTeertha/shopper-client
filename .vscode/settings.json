@@ -3,5 +3,8 @@
     "editor.defaultFormatter": "Wscats.qf",
     "[typescriptreact]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "eternalphane.tsfmt-vscode"
     }
 }

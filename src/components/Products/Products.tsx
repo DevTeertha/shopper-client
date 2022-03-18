@@ -12,6 +12,7 @@ const Products: React.FC = () => {
     const dispatch = useDispatch();
     const products = useSelector((state: any) => state.productState);
     const sortedProductsState = useSelector((state: any) => state.sortedProductState);
+
     const sortHandler = (e: any) => {
         dispatch(lowToHigSortAction([]));
         if (e.target.value === ActionType.LOW_TO_HIGH) {

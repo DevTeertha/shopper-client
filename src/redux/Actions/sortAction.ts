@@ -1,5 +1,4 @@
 import { ActionType } from "./../actionTypes";
-
 export const lowToHigSortAction = (payload: any) => {
     return {
         type: ActionType.LOW_TO_HIGH,

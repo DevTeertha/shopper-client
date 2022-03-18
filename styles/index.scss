@@ -30,3 +30,14 @@
         }
     }
 }
+.cart_item_count{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: -7px;
+    right: 30%;
+}

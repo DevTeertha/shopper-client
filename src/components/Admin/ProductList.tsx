@@ -60,8 +60,7 @@ const ProductList = () => {
                       products.data.length > 0 ?
                         searchHandler(products.data, searched).length > 0 ?
                           searchHandler(products.data, searched).map((product: productI, key: number) => <ProductListCard key={product._id + key} product={product} />)
-                          :
-                          products.data.map((product: productI, key: number) => <ProductListCard key={product._id + key} product={product} />)
+                          : <h1>No Products Found</h1>
                         :
                         <h1>No Products Found</h1>
                   }

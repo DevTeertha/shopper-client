@@ -22,7 +22,7 @@ export interface cartItemI {
     _id: string,
     productName: string,
     price: string,
-    quantity: string,
+    quantity: number,
     selectedVariant: string,
     img: ImageObjectI
 }
