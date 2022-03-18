@@ -41,8 +41,9 @@ const ProductDetails: React.FC = () => {
             selectedVariant: selectVariant
           }
         ]
+        const totalPrice = parseInt((selectPrice.split(',')).join('')) * quantity;
         const userToken: string = getStorage('userToken');
-        dispatch(placeOrderAction(userToken, parseInt((selectPrice.split(',')).join('')), newProductArr, "processing"));
+        dispatch(placeOrderAction(userToken, totalPrice, newProductArr, "processing"));
       } else {
         alert("All set quantity or select variant!");
       }
