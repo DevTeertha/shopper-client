@@ -6,7 +6,7 @@ export const getOrderListActions = () => {
         dispatch({
             type: ActionType.GET_ORDERS_REQUEST
         })
-        fetch('http://localhost:5000/api/orders/getAllOrders')
+        fetch('https://shopper-server-app.herokuapp.com/api/orders/getAllOrders')
             .then(res => res.json())
             .then((data: getOrdersI[]) => {
                 console.log("data: ", data);
@@ -31,7 +31,7 @@ export const changeOrderStatusActions = (orderId: string, user: string, orderLis
         dispatch({
             type: ActionType.CHANGE_ORDER_STATUS_REQUEST
         })
-        fetch('http://localhost:5000/api/orders/changeStatus', {
+        fetch('https://shopper-server-app.herokuapp.com/api/orders/changeStatus', {
             method: 'PUT',
             body: changeOrderData
         }).then(res => res.json()).then(data => {

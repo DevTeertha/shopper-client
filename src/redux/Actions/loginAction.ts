@@ -9,7 +9,7 @@ export const LoginAction = (email: string, password: string) => {
         dispatch({
             type: ActionType.LOGIN_REQUEST
         })
-        fetch('http://localhost:5000/api/user/login', {
+        fetch('https://shopper-server-app.herokuapp.com/api/user/login', {
             method: 'POST',
             body: loginData
         })
@@ -38,7 +38,7 @@ export const registerAction = (name: string, email: string, password: string) =>
         dispatch({
             type: ActionType.REGISTER_REQUEST
         })
-        fetch('http://localhost:5000/api/user/register', {
+        fetch('https://shopper-server-app.herokuapp.com/api/user/register', {
             method: 'POST',
             body: registerData
         })
@@ -67,7 +67,7 @@ export const getUserDetailsAction = (apikey: string) => {
     const userHeader = new Headers();
     userHeader.append("Authorization", userToken);
     return (dispatch: any) => {
-        fetch("http://localhost:5000/api/user/userDetails", {
+        fetch("https://shopper-server-app.herokuapp.com/api/user/userDetails", {
             method: 'GET',
             headers: userHeader
         })

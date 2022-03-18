@@ -8,7 +8,7 @@ export const getUserOrderListAction = (apikey: string) => {
         dispatch({
             type: ActionType.GET_USER_ORDER_LIST_REQUEST
         })
-        fetch('http://localhost:5000/api/user/getOrderList', {
+        fetch('https://shopper-server-app.herokuapp.com/api/user/getOrderList', {
             method: 'GET',
             headers: userHeader
         }).then((res: any) => res.json()).then(data => {

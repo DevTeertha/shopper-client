@@ -51,6 +51,13 @@ const Navbar = () => {
                     >
                         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
                             <li className="nav-item">
+                                <Link href="/products">
+                                    <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
+                                        <span className="ml-2">Products</span>
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link href="/about">
                                     <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
                                         <span className="ml-2">About</span>

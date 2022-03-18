@@ -11,7 +11,7 @@ export const placeOrderAction = (userToken: string, totalPrice: number, OrderLis
         dispatch({
             type: ActionType.PLACE_ORDER_REQUEST
         })
-        fetch('http://localhost:5000/api/user/placeOrder', {
+        fetch('https://shopper-server-app.herokuapp.com/api/user/placeOrder', {
             method: 'POST',
             body: placeOrderData
         }).then(res => res.json()).then(data => {
