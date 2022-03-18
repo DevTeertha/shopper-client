@@ -19,8 +19,8 @@ const RegisterForm = () => {
     password: "",
     confirm_password: "",
   });
-  let newIsEmptyRegisterInfo: any = { ...isEmptyRegisterInfo };
-  let newUserInfo: any = { ...registerInfo };
+  const newIsEmptyRegisterInfo: any = { ...isEmptyRegisterInfo };
+  const newUserInfo: any = { ...registerInfo };
   const registerInfoChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
