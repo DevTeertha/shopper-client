@@ -1,19 +1,29 @@
+import { Disclosure } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getUserDetailsAction,
-  logoutAction,
+  logoutAction
 } from "../../redux/Actions/loginAction";
 import { getStorage } from "../localStorageHandler";
-import { useSelector } from "react-redux";
 
+const navigation = [
+  { name: "Home", href: "/", current: true },
+  { name: "Products", href: "/products", current: false },
+  { name: "About", href: "/about", current: false },
+  { name: "Contact", href: "/contact", current: false },
+];
+
+const classNames = (...classes: string[]) => {
+  return classes.filter(Boolean).join(" ");
+};
 const Navbar: React.FC<any> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [openSearchInput, setOpenSearchInput] = useState(false);
   const [isOpenProfileDropdown, setIsOpenProfileDropdown] = useState(false);
 
   const userDetails = useSelector((state: any) => state.userDetails);
@@ -33,149 +43,191 @@ const Navbar: React.FC<any> = () => {
   }, [getStorage("userToken")]);
   return (
     <>
-      <nav className="sticky top-0 z-30 relative flex flex-wrap items-center justify-between px-2 py-3 bg-emerald-500 mb-3">
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-            <Link href="/">
-              <a className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white">
-                Shopper
-              </a>
-            </Link>
-            <button
-              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-              type="button"
-              onClick={() => setNavbarOpen(!navbarOpen)}
-            >
-              <i className="fa-solid fa-bars"></i>
-              <i className="fa-solid fa-bars-progress"></i>
-              <i className="fas fa-bars"></i>
-            </button>
-          </div>
-          <div
-            className={
-              "lg:flex flex-grow items-center" +
-              (navbarOpen ? " flex" : " hidden")
-            }
-            id="example-navbar-danger"
-          >
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="nav-item">
-                <Link href="/products">
-                  <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                    <span className="ml-2">Products</span>
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/about">
-                  <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                    <span className="ml-2">About</span>
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contact">
-                  <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                    <span className="ml-2">Contact</span>
-                  </a>
-                </Link>
-              </li>
-              {getStorage("userToken") ? (
-                <>
-                  <li className="nav-item relative">
-                    <Link href="/cart">
-                      <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                        <span className="ml-2">Cart</span>
-                      </a>
-                    </Link>
-                    {cart.totalItems > 0 && (
-                      <div className="cart_item_count bg-red-500 text-white p-0">
-                        {cart.totalItems}
-                      </div>
+      <Disclosure as="nav" className="bg-white z-30 sticky top-0">
+        {({ open }) => (
+          <>
+            <div className="container mx-auto px-2 sm:px-6 lg:px-4">
+              <div className="relative flex items-center justify-between h-16">
+                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                  {/* Mobile menu button*/}
+                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-white hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <span className="sr-only">Open main menu</span>
+                    {open ? (
+                      <XIcon className="block h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <MenuIcon className="block h-6 w-6" aria-hidden="true" />
                     )}
-                  </li>
-                  <li className="nav-item relative">
-                    <Link href="/order-list">
-                      <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                        <span className="ml-2">Order List</span>
+                  </Disclosure.Button>
+                </div>
+                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                  <div className="flex-shrink-0 flex items-center">
+                    <Link href="/">
+                      <a className="leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase">
+                        <span className="text-emerald-500 text-lg font-bold">
+                          Shop
+                        </span>
+                        <span className="text-gray-700 text-lg font-bold">
+                          per
+                        </span>
                       </a>
                     </Link>
-                  </li>
-                  <li className="nav-item relative cursor-pointer">
-                    <a
-                      onClick={() =>
-                        setIsOpenProfileDropdown(!isOpenProfileDropdown)
-                      }
-                      className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
-                    >
-                      <span className="ml-2">
-                        Hi{" "}
-                        {userDetails.user.user.name
-                          ? userDetails.user.user.name.split(" ")[0]
-                          : userDetails.user.user.email.split("@")[0]}{" "}
-                      </span>{" "}
-                      <svg
-                        className="ml-2 w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </a>
-
-                    <div
-                      className={`${isOpenProfileDropdown ? "" : "hidden"
-                        } top-12 absolute z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}
-                    >
-                      <ul className="py-1">
-                        <li>
-                          <a
-                            href="#"
-                            className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          >
-                            Profile
+                  </div>
+                  <div className="hidden sm:block sm:ml-6">
+                    <div className="flex h-full items-center space-x-4">
+                      {navigation.map((item) => (
+                        <Link key={item.name} href={item.href}>
+                          <a className="px-3 py-2 flex items-center text-sm font-semibold uppercase leading-snug hover:opacity-75">
+                            <span className="ml-2 text-gray-700">
+                              {item.name}
+                            </span>
                           </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          >
-                            Dashboard
-                          </a>
-                        </li>
-                      </ul>
-                      <div onClick={() => logoutHandler()} className="py-1">
-                        <a
-                          href="#"
-                          className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                        >
-                          Logout
-                        </a>
-                      </div>
+                        </Link>
+                      ))}
                     </div>
-                  </li>
-                </>
-              ) : (
-                <li className="nav-item">
-                  <Link href="/login">
-                    <a className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75">
-                      <span className="ml-2">Login</span>
-                    </a>
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </div>
-        </div>
-      </nav>
+                  </div>
+                </div>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  {getStorage("userToken") ? (
+                    <>
+                      <div className="hidden md:block nav-item relative">
+                        <div
+                          className={`flex rounded-lg ${openSearchInput &&
+                            "transition duration-150 ease-out border"
+                            }`}
+                        >
+                          {openSearchInput && (
+                            <input
+                              className="transition duration-150 ease-out pl-4 focus:outline-none"
+                              type="text"
+                              placeholder="Search"
+                            />
+                          )}
+                          <a
+                            onClick={() => setOpenSearchInput(!openSearchInput)}
+                            className="cursor-pointer px-3 py-2 flex items-center text-sm font-semibold uppercase leading-snug hover:opacity-75"
+                          >
+                            <i className="text-gray-700 text-base fa-solid fa-magnifying-glass"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div className="nav-item relative">
+                        <Link href="/cart">
+                          <a className="px-3 py-2 flex items-center text-sm font-semibold uppercase leading-snug hover:opacity-75">
+                            <i className="text-gray-700 fa-solid text-base fa-cart-shopping"></i>
+                          </a>
+                        </Link>
+                        {cart.totalItems > 0 && (
+                          <div className="cart_item_count bg-red-500 p-0">
+                            {cart.totalItems}
+                          </div>
+                        )}
+                      </div>
+                      <div className="nav-item relative cursor-pointer">
+                        <a
+                          onClick={() =>
+                            setIsOpenProfileDropdown(!isOpenProfileDropdown)
+                          }
+                          className="px-3 py-2 flex items-center text-sm font-semibold leading-snu hover:opacity-75"
+                        >
+                          <i className="text-gray-700 fa-regular text-base fa-user"></i>
+                        </a>
+
+                        <div
+                          className={`${isOpenProfileDropdown ? "" : "hidden"
+                            } top-12 right_70pxNeg absolute z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-300 dark:divide-gray-300`}
+                        >
+                          <h6 className="text-center p-2">
+                            Hi,
+                            {userDetails.user.user.name
+                              ? userDetails.user.user.name.split(" ")[0]
+                              : userDetails.user.user.email.split("@")[0]}{" "}
+                          </h6>
+                          <div className="py-1">
+                            <div>
+                              <a className="block py-2 px-4 text-sm text-gray-900 hover:bg-gray-100">
+                                Profile
+                              </a>
+                            </div>
+                            <div>
+                              <Link href="/order-list">
+                                <a className="block py-2 px-4 text-sm text-gray-900 hover:bg-gray-100">
+                                  Order List
+                                </a>
+                              </Link>
+                            </div>
+                            <div>
+                              <a className="block py-2 px-4 text-sm text-gray-900 hover:bg-gray-100">
+                                Dashboard
+                              </a>
+                            </div>
+                          </div>
+                          <div onClick={() => logoutHandler()} className="py-1">
+                            <a className="block py-2 px-4 font-semibold text-sm text-red-500 hover:bg-gray-100">
+                              Logout
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="hidden md:block nav-item relative">
+                        <div
+                          className={`flex rounded-lg ${openSearchInput &&
+                            "transition duration-150 ease-out border"
+                            }`}
+                        >
+                          {openSearchInput && (
+                            <input
+                              className="transition duration-150 ease-out pl-4 focus:outline-none"
+                              type="text"
+                              placeholder="Search"
+                            />
+                          )}
+                          <a
+                            onClick={() => setOpenSearchInput(!openSearchInput)}
+                            className="cursor-pointer px-3 py-2 flex items-center text-sm font-semibold uppercase leading-snug hover:opacity-75"
+                          >
+                            <i className="text-gray-700 text-base fa-solid fa-magnifying-glass"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div className="nav-item">
+                        <Link href="/login">
+                          <a className="px-3 py-2 flex items-center text-sm font-semibold uppercase leading-snug hover:opacity-75">
+                            <span className="ml-2">Login</span>
+                          </a>
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <Disclosure.Panel className="sm:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                {navigation.map((item) => (
+                  <Disclosure.Button
+                    key={item.name}
+                    as="a"
+                    href={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-emerald-700 text-white"
+                        : "text-gray-300 hover:bg-emerald-500 hover:text-white",
+                      "block px-3 py-2 rounded-md text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
+                  </Disclosure.Button>
+                ))}
+              </div>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
     </>
   );
 };

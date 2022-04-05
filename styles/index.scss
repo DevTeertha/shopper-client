@@ -2,6 +2,9 @@
 @import "~tailwindcss/components";
 @import "~tailwindcss/utilities";
 
+.right_70pxNeg {
+  right: -70px;
+}
 .navbar_dropdown_profile {
   position: absolute;
   top: 55px;
@@ -32,12 +35,13 @@
 }
 .cart_item_count {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  top: -7px;
+  top: 0;
   right: 30%;
+  color: white;
 }

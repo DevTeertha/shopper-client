@@ -1,11 +1,12 @@
 import { ActionType } from "../actionTypes";
+import { AppDispatch } from "../types/_types";
 
 export const LoginAction = (email: string, password: string) => {
   const loginData = new FormData();
   loginData.append("email", email);
   loginData.append("password", password);
 
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     dispatch({
       type: ActionType.LOGIN_REQUEST,
     });
@@ -39,7 +40,7 @@ export const registerAction = (
   registerData.append("name", name);
   registerData.append("email", email);
   registerData.append("password", password);
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     dispatch({
       type: ActionType.REGISTER_REQUEST,
     });
@@ -71,7 +72,7 @@ export const getUserDetailsAction = (apikey: string) => {
   const userToken = "bearer " + apikey;
   const userHeader = new Headers();
   userHeader.append("Authorization", userToken);
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     fetch("https://shopper-server-app.herokuapp.com/api/user/userDetails", {
       method: "GET",
       headers: userHeader,

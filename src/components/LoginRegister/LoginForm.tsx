@@ -1,14 +1,15 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { userInfoI } from "../../interfaces/ProductsInterface";
 import { LoginAction } from "../../redux/Actions/loginAction";
 
 const LoginForm: React.FC = () => {
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<userInfoI>({
     email: "",
     password: "",
   });
-  const newUserInfo: any = { ...userInfo };
+  const newUserInfo: userInfoI = { ...userInfo };
   const dispatch = useDispatch();
   const loginDetails = useSelector((state: any) => state.login);
 

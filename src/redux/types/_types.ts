@@ -1,3 +1,5 @@
+import store from "../store";
+
 export interface IProduct {
   _id: string;
   productName: string | undefined;
@@ -43,3 +45,5 @@ export type PlaceOrderAction = {
   type: string;
   payload: string;
 };
+
+export type AppDispatch = typeof store.dispatch;

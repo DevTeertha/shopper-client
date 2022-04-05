@@ -2,6 +2,10 @@ export interface VariantI {
   variant: string;
   price: string;
 }
+export interface userInfoI {
+  email: string;
+  password: string;
+}
 export interface ImageObjectI {
   contentType: string;
   size: number;
