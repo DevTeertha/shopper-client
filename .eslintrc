@@ -6,7 +6,8 @@
     "prettier",
     "plugin:jsx-a11y/recommended"
   ],
-  "parser": "babel-eslint",
+  "requireConfigFile": false,
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 8
   },
